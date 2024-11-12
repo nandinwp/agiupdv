@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35424.110
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agiu_PDV", "Agiu_PDV\Agiu_PDV.csproj", "{3E02F196-E3DA-43D4-9BC2-D850D148CD96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDD_Agiu", "TDD_Agiu\TDD_Agiu.csproj", "{320B0850-AC88-465A-B1BA-4F727611762D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E02F196-E3DA-43D4-9BC2-D850D148CD96} = {3E02F196-E3DA-43D4-9BC2-D850D148CD96}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E02F196-E3DA-43D4-9BC2-D850D148CD96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E02F196-E3DA-43D4-9BC2-D850D148CD96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E02F196-E3DA-43D4-9BC2-D850D148CD96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E02F196-E3DA-43D4-9BC2-D850D148CD96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{320B0850-AC88-465A-B1BA-4F727611762D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{320B0850-AC88-465A-B1BA-4F727611762D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{320B0850-AC88-465A-B1BA-4F727611762D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{320B0850-AC88-465A-B1BA-4F727611762D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
