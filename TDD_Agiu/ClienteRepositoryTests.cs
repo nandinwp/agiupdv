@@ -9,7 +9,7 @@ namespace TDD_Agiu
 {
 
     [TestClass]
-    public class UnitTest1
+    public class ClienteRepositoryTests
     {
         private string connectionString = "Host=localhost;Port=5432;Database=AgiuPDV;Username=agiupdv;Password=agiupdv";
 
@@ -38,6 +38,19 @@ namespace TDD_Agiu
             var clienteAdicionado = await clienteRepository.GetByNameAsync(cliente.Nome);
             Assert.IsNotNull(clienteAdicionado);
             Assert.AreEqual(cliente.Nome, clienteAdicionado.Nome);
+        }
+
+        [TestMethod]
+        public async Task Teste_BuscarCliente()
+        {
+            var clienteRepository = new ClienteRepository(connectionString);
+            var clienteService = new ClienteService(clienteRepository);
+
+            int idCliente = 15;
+            var cliente = await clienteService.GetByIdAsync(idCliente);
+
+            Assert.IsNotNull(cliente, "Cliente existe");
+            Assert.IsTrue(cliente.Nome is string);
         }
 
         /// <summary>

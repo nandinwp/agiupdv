@@ -34,7 +34,7 @@ namespace Agiu_PDV.Utils
 
             }
 
-            return decimal.Parse( s );
+            return string.IsNullOrEmpty(s)?0:decimal.Parse(s);
         }
 
         public static string ExtrairNomeBase(this string s)

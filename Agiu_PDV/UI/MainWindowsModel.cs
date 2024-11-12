@@ -67,8 +67,10 @@ namespace Agiu_PDV.UI
                 case EAction.GenClientes:
                 case EAction.GenProdutos:
                 case EAction.GenVendas:
-                    _forCurrentSelectedView =_buttonAction = action;
+                    _forCurrentSelectedView = action;
+                    _buttonAction = action;
                     GlobalData.Instance.ActionAtualView = action;
+                    GlobalData.Instance.CurrentId = 0;
                     OperateViews();
                     break;
                 case EAction.GenRelatorios:
@@ -94,7 +96,7 @@ namespace Agiu_PDV.UI
 
             string op = operation.ToString().ToLower();
 
-            if (op.Contains("editar") || op.Contains("del"))
+            if (op.Contains("editar") || op.Contains("apagar"))
             {
                 if (GlobalData.Instance.CurrentId == 0)
                     return;
@@ -167,10 +169,9 @@ namespace Agiu_PDV.UI
             return dataTable;
         }
 
-
-
         private async Task OperarDelecaoAsync(EDialogOperation operation)
         {
+            var temp = _forCurrentSelectedView;
             int id = GlobalData.Instance.CurrentId;
 
             var confirmResult = MessageBox.Show("Você tem certeza que quer apagar?",
@@ -220,14 +221,24 @@ namespace Agiu_PDV.UI
             {
                 MessageBox.Show("Não foi possível entender a sua solicitação!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
+            _buttonAction = temp;
             OperateViews();
         }
-
 
         // Opera o modal de vendas, com o sistema mais complexo de relacionamento de produto, cliente e venda item
         async void OperarModalVenda(EDialogOperation operation)
         {
+
+            var temp = _forCurrentSelectedView;
+
+            var produto = await GlobalData.Instance.ProdutoService.ObterTodosProdutosAsync();
+
+            if (produto.Produtos.Count() <= 0)
+            {
+                MessageBox.Show($"Crie um produto antes!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             _modalVenda = null;
             _modalVenda = new ModalVendaUserControl(operation);
             _modalVenda.Dock = DockStyle.Fill;
@@ -255,6 +266,7 @@ namespace Agiu_PDV.UI
 
                 windwos.Close();
                 windwos = null;
+                _buttonAction = temp;
                 OperateViews();
             };
 
@@ -274,6 +286,8 @@ namespace Agiu_PDV.UI
             _modalEditCommons.btn_confirm.Click += async (sender, e) =>
             {
 
+                var temp = _forCurrentSelectedView;
+
                 Tuple<bool, object> response = ValidaCampos(operation);
 
                 if (response.Item1==true)
@@ -292,6 +306,7 @@ namespace Agiu_PDV.UI
 
                 windwos.Close();
                 windwos = null;
+                _buttonAction = temp;
                 OperateViews();
             };
 
